@@ -55,7 +55,6 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-
 /* Transactions section */
 .transactions h2 {
   margin-top: 0;
@@ -100,4 +99,25 @@ button:hover {
 
 .balance.negative {
   color: #dc3545;
+}
+/* Animation Keyframes */
+@keyframes popEffect {
+  0% {
+    transform: scale(1);
+    background-color: #cf30ca;
+  }
+  50% {
+    transform: scale(1.1);
+    background-color: #9c1195;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #00c3ff;
+  }
+}
+
+/* Transition + animation base class */
+.animate-button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  animation: popEffect 0.4s ease;
 }

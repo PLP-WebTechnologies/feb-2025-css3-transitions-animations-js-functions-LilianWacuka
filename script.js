@@ -43,24 +43,39 @@ document.getElementById('clear-btn').addEventListener('click', () => {
 
 
 // Handle form submission
+const addBtn = document.getElementById('add-btn');
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const desc = description.value.trim();
   const amt = parseFloat(amount.value);
+  const type = document.getElementById('type').value;
 
   if (desc === '' || isNaN(amt)) return;
 
-  const transaction = { description: desc, amount: amt };
-  transactions.push(transaction);
+  const transaction = {
+    description: desc,
+    amount: type === 'expense' ? -Math.abs(amt) : Math.abs(amt),
+  };
 
+  transactions.push(transaction);
   saveToLocalStorage();
   renderTransactions();
 
-  // Reset inputs
+  // Reset form
   description.value = '';
   amount.value = '';
+
+  // Trigger button animation
+  addBtn.classList.add('animate-button');
+
+  // Remove animation class after it's done so it can trigger again next time
+  setTimeout(() => {
+    addBtn.classList.remove('animate-button');
+  }, 400); // Match animation duration
 });
+
 
 // Initial render
 renderTransactions();
